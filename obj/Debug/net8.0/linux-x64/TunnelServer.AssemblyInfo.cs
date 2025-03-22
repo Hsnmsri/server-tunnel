@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("TunnelServer")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7a2d610b367faffade62dd4f054330bc68b5173b")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+fa6dad0a0d7065767d3fdf3183d632ce62be629d")]
 [assembly: System.Reflection.AssemblyProductAttribute("TunnelServer")]
 [assembly: System.Reflection.AssemblyTitleAttribute("TunnelServer")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
