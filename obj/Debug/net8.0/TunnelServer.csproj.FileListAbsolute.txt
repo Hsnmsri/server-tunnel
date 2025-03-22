@@ -1,0 +1,14 @@
+/home/hossein/Desktop/ts-nodejs-terminal-project/dotnet-tunnel/TunnelServer/bin/Debug/net8.0/TunnelServer
+/home/hossein/Desktop/ts-nodejs-terminal-project/dotnet-tunnel/TunnelServer/bin/Debug/net8.0/TunnelServer.deps.json
+/home/hossein/Desktop/ts-nodejs-terminal-project/dotnet-tunnel/TunnelServer/bin/Debug/net8.0/TunnelServer.runtimeconfig.json
+/home/hossein/Desktop/ts-nodejs-terminal-project/dotnet-tunnel/TunnelServer/bin/Debug/net8.0/TunnelServer.dll
+/home/hossein/Desktop/ts-nodejs-terminal-project/dotnet-tunnel/TunnelServer/bin/Debug/net8.0/TunnelServer.pdb
+/home/hossein/Desktop/ts-nodejs-terminal-project/dotnet-tunnel/TunnelServer/obj/Debug/net8.0/TunnelServer.GeneratedMSBuildEditorConfig.editorconfig
+/home/hossein/Desktop/ts-nodejs-terminal-project/dotnet-tunnel/TunnelServer/obj/Debug/net8.0/TunnelServer.AssemblyInfoInputs.cache
+/home/hossein/Desktop/ts-nodejs-terminal-project/dotnet-tunnel/TunnelServer/obj/Debug/net8.0/TunnelServer.AssemblyInfo.cs
+/home/hossein/Desktop/ts-nodejs-terminal-project/dotnet-tunnel/TunnelServer/obj/Debug/net8.0/TunnelServer.csproj.CoreCompileInputs.cache
+/home/hossein/Desktop/ts-nodejs-terminal-project/dotnet-tunnel/TunnelServer/obj/Debug/net8.0/TunnelServer.dll
+/home/hossein/Desktop/ts-nodejs-terminal-project/dotnet-tunnel/TunnelServer/obj/Debug/net8.0/refint/TunnelServer.dll
+/home/hossein/Desktop/ts-nodejs-terminal-project/dotnet-tunnel/TunnelServer/obj/Debug/net8.0/TunnelServer.pdb
+/home/hossein/Desktop/ts-nodejs-terminal-project/dotnet-tunnel/TunnelServer/obj/Debug/net8.0/TunnelServer.genruntimeconfig.cache
+/home/hossein/Desktop/ts-nodejs-terminal-project/dotnet-tunnel/TunnelServer/obj/Debug/net8.0/ref/TunnelServer.dll

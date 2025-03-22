@@ -1,0 +1,2 @@
+/home/hossein/Desktop/ts-nodejs-terminal-project/dotnet-tunnel/TunnelServer/bin/Release/net8.0/linux-x64/publish/TunnelServer.pdb
+/home/hossein/Desktop/ts-nodejs-terminal-project/dotnet-tunnel/TunnelServer/bin/Release/net8.0/linux-x64/publish/TunnelServer

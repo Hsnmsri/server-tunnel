@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "4xkn+9d7j98=",
+  "success": true,
+  "projectFilePath": "/home/hossein/Desktop/ts-nodejs-terminal-project/dotnet-tunnel/TunnelServer/TunnelServer.csproj",
+  "expectedPackageFiles": [
+    "/home/hossein/.nuget/packages/microsoft.net.illink.tasks/8.0.12/microsoft.net.illink.tasks.8.0.12.nupkg.sha512",
+    "/home/hossein/.nuget/packages/microsoft.netcore.app.runtime.linux-x64/8.0.12/microsoft.netcore.app.runtime.linux-x64.8.0.12.nupkg.sha512",
+    "/home/hossein/.nuget/packages/microsoft.aspnetcore.app.runtime.linux-x64/8.0.12/microsoft.aspnetcore.app.runtime.linux-x64.8.0.12.nupkg.sha512"
+  ],
+  "logs": []
+}
