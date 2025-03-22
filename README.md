@@ -43,7 +43,7 @@ sequenceDiagram
 ```bash
 sudo mkdir /opt/tunnel
 sudo cd /opt/tunnel
-sudo wget https://google.com
+sudo wget https://github.com/Hsnmsri/server-tunnel/releases/download/v1.0.0/TunnelServer?raw=true
 ```
 
 2- Create a `settings.json` file to configure the program
