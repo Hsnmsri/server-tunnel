@@ -195,3 +195,4 @@
 /home/hossein/Desktop/ts-nodejs-terminal-project/dotnet-tunnel/TunnelServer/obj/Release/net8.0/linux-x64/TunnelServer.pdb
 /home/hossein/Desktop/ts-nodejs-terminal-project/dotnet-tunnel/TunnelServer/obj/Release/net8.0/linux-x64/TunnelServer.genruntimeconfig.cache
 /home/hossein/Desktop/ts-nodejs-terminal-project/dotnet-tunnel/TunnelServer/obj/Release/net8.0/linux-x64/ref/TunnelServer.dll
+/home/hossein/Desktop/ts-nodejs-terminal-project/dotnet-tunnel/TunnelServer/obj/Release/net8.0/linux-x64/TunnelServer.sourcelink.json

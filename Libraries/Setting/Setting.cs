@@ -1,114 +1,99 @@
-// using System;
-// using System.IO;
-// using System.Text.Json;
-// using System.Threading.Tasks;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
-// namespace TunnelServer.Libraries.Setting
-// {
-//     public class AppSetting
-//     {
-//         private string FilePath;
-//         public LocalConfiguration LocalConfig { get; set; } = new LocalConfiguration();
-//         public ServerConfiguration ServerConfig { get; set; } = new ServerConfiguration();
-//         public LoggingConfiguration LoggingConfig { get; set; } = new LoggingConfiguration();
+namespace TunnelServer.Libraries.Setting
+{
+    public class SettingLoader
+    {
+        private readonly Logger.Logger _logger;
+        private readonly string _filePath; // Removed nullable since we validate it in constructor
+        private AppConfig? _config;
 
-//         public AppSetting(string filePath)
-//         {
-//             this.FilePath = filePath;
-//         }
+        /// <summary>
+        /// Gets the logging configuration.
+        /// </summary>
+        public LoggingConfig? Logging { get; private set; }
 
-//         public async Task<bool> UpdateSettingsAsync(string? filePath = null)
-//         {
-//             try
-//             {
-//                 filePath = filePath ?? this.FilePath;
+        /// <summary>
+        /// Gets the local configuration.
+        /// </summary>
+        public LocalConfig? Local { get; private set; }
 
-//                 if (string.IsNullOrEmpty(filePath) || !File.Exists(filePath))
-//                 {
-//                     Console.WriteLine($"⚠ Warning: Settings file not found: {filePath}");
-//                     return false;
-//                 }
+        /// <summary>
+        /// Gets the server configuration.
+        /// </summary>
+        public ServerConfig? Server { get; private set; }
 
-//                 // Read the file asynchronously
-//                 string jsonString = await File.ReadAllTextAsync(filePath);
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SettingLoader"/> class.
+        /// </summary>
+        /// <param name="jsonFilePath">The path to the JSON configuration file.</param>
+        /// <param name="logger">The logger instance for logging errors and information.</param>
+        /// <exception cref="ArgumentNullException">Thrown when <paramref name="jsonFilePath"/> or <paramref name="logger"/> is null.</exception>
+        public SettingLoader(string jsonFilePath, Logger.Logger logger)
+        {
+            ArgumentNullException.ThrowIfNull(jsonFilePath, nameof(jsonFilePath));
+            ArgumentNullException.ThrowIfNull(logger, nameof(logger));
 
-//                 // Deserialize data safely
-//                 JsonSerializerOptions options = new JsonSerializerOptions
-//                 {
-//                     PropertyNameCaseInsensitive = true
-//                 };
+            _filePath = jsonFilePath.Trim();
+            _logger = logger;
+        }
 
-//                 AppConfiguration? settings;
-//                 try
-//                 {
-//                     settings = JsonSerializer.Deserialize<AppConfiguration>(jsonString, options);
-//                 }
-//                 catch (JsonException ex)
-//                 {
-//                     Console.WriteLine($"❌ Error: Invalid JSON format in settings file: {ex.Message}");
-//                     return false;
-//                 }
+        /// <summary>
+        /// Loads and updates the application settings from the specified JSON file.
+        /// </summary>
+        /// <exception cref="FileNotFoundException">Thrown when the configuration file does not exist.</exception>
+        /// <exception cref="JsonException">Thrown when the JSON file cannot be deserialized.</exception>
+        /// <exception cref="InvalidOperationException">Thrown when the configuration data is invalid or incomplete.</exception>
+        public void UpdateSettings()
+        {
+            try
+            {
+                // Check if the configuration file exists
+                if (!File.Exists(_filePath))
+                {
+                    throw new FileNotFoundException($"Setting file not found at: {_filePath}");
+                }
 
-//                 if (settings == null)
-//                 {
-//                     Console.WriteLine("❌ Error: Failed to fully load settings file!");
-//                     return false;
-//                 }
+                // Read the JSON content from the file
+                string jsonContent = File.ReadAllText(_filePath);
 
-//                 // Convert string Level to LoggingLevel enum
-//                 if (!Enum.TryParse(settings.Logging?.Level, true, out LoggingLevel loggingLevel))
-//                 {
-//                     loggingLevel = LoggingLevel.Debug; // Default to Debug if conversion fails
-//                 }
+                // Configure JSON deserialization options
+                var options = new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true, // Ignore case sensitivity for property names
+                    Converters = { new JsonStringEnumConverter() } // Support string-to-enum conversion (e.g., for LogLevel)
+                };
 
-//                 // Assign values with null checks
-//                 this.LocalConfig = settings.Local ?? new LocalConfiguration();
-//                 this.ServerConfig = settings.Server ?? new ServerConfiguration();
-//                 this.LoggingConfig = settings.Logging ?? new LoggingConfiguration { Level = loggingLevel };
+                // Deserialize the JSON content into AppConfig
+                _config = JsonSerializer.Deserialize<AppConfig>(jsonContent, options)
+                    ?? throw new JsonException("Failed to deserialize the configuration file.");
 
-//                 // Update the file path in case it was changed
-//                 this.FilePath = filePath;
+                // Validate and assign configuration properties
+                if (_config.Logging == null || _config.Local == null || _config.Server == null)
+                {
+                    throw new InvalidOperationException("Configuration file is missing required sections (Logging, Local, or Server).");
+                }
 
-//                 Console.WriteLine("✅ Settings successfully updated!");
-//                 return true;
-//             }
-//             catch (Exception error)
-//             {
-//                 Console.WriteLine($"❌ Error loading settings file: {error.Message}");
-//                 return false;
-//             }
-//         }
-//     }
-
-//     public class AppConfiguration
-//     {
-//         public LocalConfiguration? Local { get; set; }
-//         public ServerConfiguration? Server { get; set; }
-//         public LoggingConfiguration? Logging { get; set; }
-//     }
-
-//     public class LocalConfiguration
-//     {
-//         public string Ip { get; set; } = "0.0.0.0";  // Default value to avoid null
-//         public int Port { get; set; } = 8000;       // Default value to avoid null
-//     }
-
-//     public class ServerConfiguration
-//     {
-//         public string Ip { get; set; } = "0.0.0.0";  // Default value to avoid null
-//         public int Port { get; set; } = 8000;       // Default value to avoid null
-//     }
-
-//     public class LoggingConfiguration
-//     {
-//         public LoggingLevel Level { get; set; } = LoggingLevel.Debug; // Default value to avoid null
-//     }
-
-//     public enum LoggingLevel
-//     {
-//         None = 1,
-//         Debug = 2,
-//         Warning = 3,
-//         Error = 4,
-//     }
-// }
+                Logging = _config.Logging;
+                Local = _config.Local;
+                Server = _config.Server;
+            }
+            catch (FileNotFoundException ex)
+            {
+                _logger.Error($"Configuration file error: {ex.Message}");
+                throw;
+            }
+            catch (JsonException ex)
+            {
+                _logger.Error($"Failed to parse configuration: {ex.Message}");
+                throw;
+            }
+            catch (Exception ex)
+            {
+                _logger.Error($"Unexpected error while loading configuration: {ex.Message}");
+                throw;
+            }
+        }
+    }
+}
